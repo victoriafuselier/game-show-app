@@ -20,3 +20,14 @@ startButton.addEventListener('click', () => {
     const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
 });
+
+function getRandomPhraseAsArray(arr) {
+    // function fetches a random phrase from the phrases array
+    let randomNumber = Math.floor(Math.random() * arr.length);
+    let phrase = arr[randomNumber];
+    let splitPhrase = phrase.split();
+    return splitPhrase;
+}
+
+console.log(getRandomPhraseAsArray(phrases));
+
