@@ -25,9 +25,22 @@ function getRandomPhraseAsArray(arr) {
     // function fetches a random phrase from the phrases array
     let randomNumber = Math.floor(Math.random() * arr.length);
     let phrase = arr[randomNumber];
-    let splitPhrase = phrase.split();
-    return splitPhrase;
+    let phraseArray = phrase.split();
+    return phraseArray;
 }
 
 console.log(getRandomPhraseAsArray(phrases));
+
+function addPhraseToDisplay(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let listItems = '';
+        listItems += `<li>${i}</li>`;
+        let list = document.querySelector('#phrases ul');
+        list.appendChild(listItem);
+        if (i !== ' ') {
+            listItem.className = 'letter';
+        }
+    }
+
+}
 
