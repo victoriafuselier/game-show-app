@@ -47,3 +47,17 @@ function addPhraseToDisplay(arr) {
 }
 
 addPhraseToDisplay(phraseToDisplay);
+
+function checkLetter(userButtonInput) {
+    const letters = document.querySelectorAll('.letter');
+    for (let i = 0; i < letters.length; i++) {
+        if (letters[i] === userButtonInput) {
+            li[i].className = 'show';
+            const match = li[i];
+            return match;
+        } else {
+            return null;
+        }
+    }
+}
+
