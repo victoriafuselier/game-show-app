@@ -25,22 +25,25 @@ function getRandomPhraseAsArray(arr) {
     // function fetches a random phrase from the phrases array
     let randomNumber = Math.floor(Math.random() * arr.length);
     let phrase = arr[randomNumber];
-    let phraseArray = phrase.split();
+    let phraseArray = phrase.split('');
     return phraseArray;
 }
 
-console.log(getRandomPhraseAsArray(phrases));
+const phraseToDisplay = getRandomPhraseAsArray(phrases);
 
 function addPhraseToDisplay(arr) {
-    for (let i = 0; i < arr.length; i++) {
-        let listItems = '';
-        listItems += `<li>${i}</li>`;
-        let list = document.querySelector('#phrases ul');
-        list.appendChild(listItem);
-        if (i !== ' ') {
-            listItem.className = 'letter';
-        }
+    //function creates an li, adds array's text at index to li, appends li to ul, and repeats until all characters in the array are li's
+        for (let i = 0; i < arr.length; i++) {
+            let li = document.createElement('li');
+            li.textContent = `${arr[i]}`;
+            let ul = document.querySelector('#phrase ul');
+            ul.appendChild(li);
+            if (li.textContent === ' ') {
+                li.className = 'space';
+            } else {
+                li.className = 'letter';                
+            }
     }
-
 }
 
+addPhraseToDisplay(phraseToDisplay);
