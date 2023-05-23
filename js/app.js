@@ -48,16 +48,29 @@ function addPhraseToDisplay(arr) {
 
 addPhraseToDisplay(phraseToDisplay);
 
-function checkLetter(userButtonInput) {
+function checkLetter(clickedButton) {
     const letters = document.querySelectorAll('.letter');
     for (let i = 0; i < letters.length; i++) {
-        if (letters[i] === userButtonInput) {
-            li[i].className = 'show';
-            const match = li[i];
-            return match;
+        if (letters[i].textContent === clickedButton.textContent) {
+            letters[i].className = 'show';
+            const match = clickedButton.textContent;
         } else {
             return null;
         }
     }
+    return match;
 }
 
+letterButtons.addEventListener('click', (e) => {
+    if (e.target.type === 'BUTTON' && e.target.className !== 'chosen') {
+        const clickedButton = e.target;
+        clickedButton.className = 'chosen';
+        const correctGuess = checkLetter(clickedButton);
+        clickedButton.disabled = true;
+    } else {
+        const heartsList = document.querySelector('ol');
+        const hearts = document.getElementsByClassName('tries');
+        heartsList.removeChild(hearts[0]);
+        wrongGuesses += 1;
+    }
+});
