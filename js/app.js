@@ -17,6 +17,7 @@ const phrases = [
 ];
 
 startButton.addEventListener('click', () => {
+    //function hides the start game overlay when 'start game' button is clicked
     const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
 });
@@ -30,6 +31,7 @@ function getRandomPhraseAsArray(arr) {
 }
 
 const phraseToDisplay = getRandomPhraseAsArray(phrases);
+//stores a random phrase from the phrases array and turns that phrase into an array
 
 function addPhraseToDisplay(arr) {
     //function creates an li, adds array's text at index to li, appends li to ul, and repeats until all characters in the array are li's
@@ -48,29 +50,31 @@ function addPhraseToDisplay(arr) {
 
 addPhraseToDisplay(phraseToDisplay);
 
-function checkLetter(clickedButton) {
-    const letters = document.querySelectorAll('.letter');
-    for (let i = 0; i < letters.length; i++) {
-        if (letters[i].textContent === clickedButton.textContent) {
-            letters[i].className = 'show';
-            const match = clickedButton.textContent;
-        } else {
-            return null;
+function checkLetter (clickedButton) {
+    lettersInPhrase = document.querySelectorAll('.letter');
+    const match = null;
+    for (let i = 0; i < lettersInPhrase.length; i++) {
+        if (clickedButton.textContent === lettersInPhrase[i].textContent) {
+            lettersInPhrase[i].className = 'show';
+            match = clickedButton.textContent;
+            return match;
         }
     }
-    return match;
 }
 
 letterButtons.addEventListener('click', (e) => {
-    if (e.target.type === 'BUTTON' && e.target.className !== 'chosen') {
+    if (e.target.tagName === 'BUTTON') {
         const clickedButton = e.target;
         clickedButton.className = 'chosen';
-        const correctGuess = checkLetter(clickedButton);
         clickedButton.disabled = true;
-    } else {
-        const heartsList = document.querySelector('ol');
-        const hearts = document.getElementsByClassName('tries');
-        heartsList.removeChild(hearts[0]);
-        wrongGuesses += 1;
+        if (checkLetter(clickedButton)) {
+            const letterFound = clickedButton.textContent;
+            if (letterFound === null) {
+                const heartsList = document.querySelector('ol');
+                const hearts = document.getElementsByClassName('tries');
+                heartsList.removeChild(hearts[0]);
+                wrongGuesses += 1;
+            }
+        } 
     }
 });
