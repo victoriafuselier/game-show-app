@@ -92,14 +92,17 @@ function checkWin () {
         overlay.classList.add('win');
         overlay.textContent = 'Congratulations! You won!';
         overlay.style.display = 'flex';
+        startButton.textContent = 'Play again';
     }
     if (wrongGuesses > 4) {
         for (let i =0; i < showLis.length; i++) {
             showLis[i].classList.remove('show');
         }
         overlay.classList.add('lose');
+        overlay.classList.remove('start');
         overlay.textContent = 'Uh oh! Better luck next time!';
         overlay.style.display = 'flex';
+        startButton.textContent = 'Play again';
     }
 }
  
