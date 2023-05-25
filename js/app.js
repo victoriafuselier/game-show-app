@@ -81,6 +81,9 @@ function checkWin () {
     letterLis = document.querySelectorAll('.letter');
     showLis = document.querySelectorAll('.show');
     if (letterLis.length === showLis.length) {
+        for (let i = 0; i < showLis.length; i++) {
+            showLis[i].classList.remove('show');
+        }
         let overlay = document.querySelector('#overlay');
         overlay.classList.add('win');
         overlay.textContent = 'Congratulations! You won!';
