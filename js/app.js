@@ -2,6 +2,7 @@ const letterButtons = document.querySelector('#qwerty');
 const phraseToGuess = document.querySelector('#phrase');
 let wrongGuesses = 0;
 const startButton = document.querySelector('.btn__reset');
+const title = document.querySelector('.title');
 const phrases = [
     'FOOL ME ONCE SHAME ON YOU FOOL ME TWICE SHAME ON ME',
     'HOGWARTS SCHOOL OF WITCHCRAFT AND WIZARDRY',
@@ -90,7 +91,7 @@ function checkWin () {
         }
         let overlay = document.querySelector('#overlay');
         overlay.classList.add('win');
-        overlay.textContent = 'Congratulations! You won!';
+        title.textContent = 'Congratulations! You won!';
         overlay.style.display = 'flex';
         startButton.textContent = 'Play again';
     }
@@ -99,10 +100,23 @@ function checkWin () {
             showLis[i].classList.remove('show');
         }
         overlay.classList.add('lose');
-        overlay.classList.remove('start');
-        overlay.textContent = 'Uh oh! Better luck next time!';
+        title.textContent = 'Uh oh! Better luck next time!';
         overlay.style.display = 'flex';
         startButton.textContent = 'Play again';
+    }
+}
+
+function reset() {
+    wrongGuesses = 0;
+    ul = document.querySelector('#phrase ul');
+    li = document.querySelectorAll('li');
+    const heartsList = document.querySelector('ol');
+    const hearts = document.getElementsByClassName('tries');
+    for (let i = 0; i < li.length; i++) {
+        ul.removeChild(li);
+    }
+    for (let i = 0; i < 5; i++) {
+        heartsList.append(hearts[0]);
     }
 }
  
