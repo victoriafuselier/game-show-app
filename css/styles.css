@@ -77,6 +77,22 @@ button {
 
 /* Phrase */
 
+#phrase {
+  margin: 0 auto;
+}
+
+#phrase ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.word-div {
+  margin-right: 50px;
+  margin-bottom: 10px;
+}
+
 .letter {
   font-size: var(--font-size-medium);
   height: 65px;

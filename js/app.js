@@ -37,20 +37,20 @@ function addPhraseToDisplay(arr) {
     //function creates an li, adds array's text at index to li, appends li to ul, and repeats until all characters in the array are li's
         for (let i = 0; i < arr.length; i++) {
             let div = document.createElement('div');
-            let characters = div.split('');
-        }
-        for (let i = 0; i < characters.length; i++) {
-            let li = document.createElement('li');
-            li.textContent = `${characters[i]}`;
-            let ul = document.querySelector('#phrase ul');
-            ul.appendChild(li);
-            if (li.textContent ==! ' ') {
-                li.classList.add('letter');                
+            div.classList.add('word-div');
+            let characters = arr[i].split('');
+            for (let i = 0; i < characters.length; i++) {
+                let li = document.createElement('li');
+                li.textContent = `${characters[i]}`;
+                let ul = document.querySelector('#phrase ul');
+                ul.appendChild(div);
+                div.appendChild(li);
+                if (li.textContent !== ' ') {
+                    li.classList.add('letter');                
+                }
             }
-    }
+        }
 }
-
-
 
 addPhraseToDisplay(phraseToDisplay);
 
@@ -87,7 +87,7 @@ function checkWin () {
     if (letterLis.length === showLis.length) {
         for (let i = 0; i < showLis.length; i++) {
             showLis[i].classList.remove('show');
-         }
+        }
         let overlay = document.querySelector('#overlay');
         overlay.classList.add('win');
         overlay.textContent = 'Congratulations! You won!';
