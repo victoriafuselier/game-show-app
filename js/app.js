@@ -83,12 +83,15 @@ function checkWin () {
     if (letterLis.length === showLis.length) {
         let overlay = document.querySelector('#overlay');
         overlay.classList.add('win');
-        overlay.textContent = 'You win!!!';
+        overlay.textContent = 'Congratulations! You won!';
         overlay.style.display = 'flex';
     }
     if (wrongGuesses > 4) {
+        for (let i =0; i < showLis.length; i++) {
+            showLis[i].classList.remove('show');
+        }
         overlay.classList.add('lose');
-        overlay.textContent = 'You loooose!';
+        overlay.textContent = 'Uh oh! Better luck next time!';
         overlay.style.display = 'flex';
     }
 }
