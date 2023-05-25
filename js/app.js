@@ -41,9 +41,9 @@ function addPhraseToDisplay(arr) {
             let ul = document.querySelector('#phrase ul');
             ul.appendChild(li);
             if (li.textContent === ' ') {
-                li.className = 'space';
+                li.classList.add('space');
             } else {
-                li.className = 'letter';                
+                li.classList.add('letter');                
             }
     }
 }
@@ -52,29 +52,44 @@ addPhraseToDisplay(phraseToDisplay);
 
 function checkLetter (clickedButton) {
     lettersInPhrase = document.querySelectorAll('.letter');
-    const match = null;
+    let match = null;
     for (let i = 0; i < lettersInPhrase.length; i++) {
-        if (clickedButton.textContent === lettersInPhrase[i].textContent) {
-            lettersInPhrase[i].className = 'show';
+        if (clickedButton.textContent.toUpperCase() === lettersInPhrase[i].textContent) {
+            lettersInPhrase[i].classList.add('show');
             match = clickedButton.textContent;
-            return match;
         }
     }
+    return match;
 }
 
 letterButtons.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
         const clickedButton = e.target;
-        clickedButton.className = 'chosen';
+        clickedButton.classList.add('chosen');
         clickedButton.disabled = true;
-        if (checkLetter(clickedButton)) {
-            const letterFound = clickedButton.textContent;
-            if (letterFound === null) {
-                const heartsList = document.querySelector('ol');
-                const hearts = document.getElementsByClassName('tries');
-                heartsList.removeChild(hearts[0]);
-                wrongGuesses += 1;
-            }
+        if (checkLetter(clickedButton) === null) {
+            const heartsList = document.querySelector('ol');
+            const hearts = document.getElementsByClassName('tries');
+            heartsList.removeChild(hearts[0]);
+            wrongGuesses += 1;
         } 
     }
+    checkWin();
 });
+
+function checkWin () {
+    letterLis = document.querySelectorAll('.letter');
+    showLis = document.querySelectorAll('.show');
+    if (letterLis.length === showLis.length) {
+        let overlay = document.querySelector('#overlay');
+        overlay.classList.add('win');
+        overlay.textContent = 'You win!!!';
+        overlay.style.display = 'flex';
+    }
+    if (wrongGuesses > 4) {
+        overlay.classList.add('lose');
+        overlay.textContent = 'You loooose!';
+        overlay.style.display = 'flex';
+    }
+}
+ 
