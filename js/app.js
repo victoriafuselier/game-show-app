@@ -89,7 +89,8 @@ buttonDiv.addEventListener('click', (e) => {
         const clickedButton = e.target;
         clickedButton.classList.add('chosen');
         clickedButton.disabled = true;
-        if (checkLetter(clickedButton) === null) {
+        let letterFound = checkLetter(clickedButton); 
+        if (letterFound === null) {
             missed += 1;
             heartImgs[heartImgs.length - missed].src = 'images/lostHeart.png';
         } 
