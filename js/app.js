@@ -115,6 +115,8 @@ function reset() {
     const ul = document.querySelector('#phrase ul');
     const wordDivs = document.querySelectorAll('.word-div');
     const heartsList = document.querySelector('ol');
+    overlay.classList.remove('win');
+    overlay.classList.remove('lose');
     // overlay.className = none;
     for (let i = 0; i < wordDivs.length; i++) {
         ul.removeChild(wordDivs[i]);
