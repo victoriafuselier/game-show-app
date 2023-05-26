@@ -1,4 +1,5 @@
-const letterButtons = document.querySelector('#qwerty');
+const letterButtons = document.querySelectorAll('#qwerty button');
+const buttonDiv = document.querySelector('#qwerty');
 const phraseToGuess = document.querySelector('#phrase');
 let wrongGuesses = 0;
 const startButton = document.querySelector('.btn__reset');
@@ -21,6 +22,9 @@ startButton.addEventListener('click', () => {
     //function hides the start game overlay when 'start game' button is clicked
     const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
+    if (startButton.textContent === 'Play again') {
+        reset();
+    }
 });
 
 function getRandomPhraseAsArray(arr) {
@@ -67,14 +71,14 @@ function checkLetter (clickedButton) {
     return match;
 }
 
-letterButtons.addEventListener('click', (e) => {
+buttonDiv.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
         const clickedButton = e.target;
         clickedButton.classList.add('chosen');
         clickedButton.disabled = true;
         if (checkLetter(clickedButton) === null) {
-            const heartsList = document.querySelector('ol');
             const hearts = document.getElementsByClassName('tries');
+            const heartsList = document.querySelector('ol');
             heartsList.removeChild(hearts[0]);
             wrongGuesses += 1;
         } 
@@ -99,6 +103,7 @@ function checkWin () {
         for (let i =0; i < showLis.length; i++) {
             showLis[i].classList.remove('show');
         }
+        overlay.classList.remove('start');
         overlay.classList.add('lose');
         title.textContent = 'Uh oh! Better luck next time!';
         overlay.style.display = 'flex';
@@ -108,15 +113,27 @@ function checkWin () {
 
 function reset() {
     wrongGuesses = 0;
-    ul = document.querySelector('#phrase ul');
-    li = document.querySelectorAll('li');
+    const ul = document.querySelector('#phrase ul');
+    const wordDivs = document.querySelectorAll('.word-div');
     const heartsList = document.querySelector('ol');
-    const hearts = document.getElementsByClassName('tries');
-    for (let i = 0; i < li.length; i++) {
-        ul.removeChild(li);
+    for (let i = 0; i < wordDivs.length; i++) {
+        ul.removeChild(wordDivs[i]);
+    }
+    for (let i = 0; i < letterButtons.length; i++) {
+        letterButtons[i].disabled = false;
+        letterButtons[i].classList.remove('chosen');
     }
     for (let i = 0; i < 5; i++) {
-        heartsList.append(hearts[0]);
+        let scoreboardList = document.querySelector('#scoreboard ol');
+        let li = document.createElement('li');
+        li.classList.add('tries');
+        scoreboardList.appendChild('li');
+        let img = document.createElement('img');
+        img.src = 'images/liveHeart.png';
+        li.appendChild(img);
     }
+    getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(phraseToDisplay);
+
 }
  
