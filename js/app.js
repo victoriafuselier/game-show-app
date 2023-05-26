@@ -1,10 +1,13 @@
 const letterButtons = document.querySelectorAll('#qwerty button');
 const buttonDiv = document.querySelector('#qwerty');
 const phraseToGuess = document.querySelector('#phrase');
-let wrongGuesses = 0;
 const startButton = document.querySelector('.btn__reset');
 const title = document.querySelector('.title');
-let heartImgs = document.querySelectorAll('.tries img');
+const heartImgs = document.querySelectorAll('.tries img');
+const overlay = document.querySelector('#overlay');
+
+let missed = 0;
+
 const phrases = [
     'FOOL ME ONCE SHAME ON YOU FOOL ME TWICE SHAME ON ME',
     'HOGWARTS SCHOOL OF WITCHCRAFT AND WIZARDRY',
@@ -21,8 +24,8 @@ const phrases = [
 
 startButton.addEventListener('click', () => {
     //function hides the start game overlay when 'start game' button is clicked
-    const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
+    //function also resets game after win or loss
     if (startButton.textContent === 'Play again') {
         reset();
     }
@@ -79,8 +82,8 @@ buttonDiv.addEventListener('click', (e) => {
         clickedButton.classList.add('chosen');
         clickedButton.disabled = true;
         if (checkLetter(clickedButton) === null) {
-            wrongGuesses += 1;
-            heartImgs[heartImgs.length - wrongGuesses].src = 'images/lostHeart.png';
+            missed += 1;
+            heartImgs[heartImgs.length - missed].src = 'images/lostHeart.png';
         } 
     }
     checkWin();
@@ -93,13 +96,12 @@ function checkWin () {
         for (let i = 0; i < showLis.length; i++) {
             showLis[i].classList.remove('show');
         }
-        let overlay = document.querySelector('#overlay');
         overlay.classList.add('win');
         title.textContent = 'Congratulations! You won!';
         overlay.style.display = 'flex';
         startButton.textContent = 'Play again';
     }
-    if (wrongGuesses > 4) {
+    if (missed > 4) {
         for (let i =0; i < showLis.length; i++) {
             showLis[i].classList.remove('show');
         }
@@ -112,7 +114,7 @@ function checkWin () {
 }
 
 function reset() {
-    wrongGuesses = 0;
+    missed = 0;
     const ul = document.querySelector('#phrase ul');
     const wordDivs = document.querySelectorAll('.word-div');
     const heartsList = document.querySelector('ol');
