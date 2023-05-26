@@ -4,6 +4,7 @@ const phraseToGuess = document.querySelector('#phrase');
 let wrongGuesses = 0;
 const startButton = document.querySelector('.btn__reset');
 const title = document.querySelector('.title');
+let heartImgs = document.querySelectorAll('.tries img');
 const phrases = [
     'FOOL ME ONCE SHAME ON YOU FOOL ME TWICE SHAME ON ME',
     'HOGWARTS SCHOOL OF WITCHCRAFT AND WIZARDRY',
@@ -35,7 +36,7 @@ function getRandomPhraseAsArray(arr) {
     return phraseSplitByWords;
 }
 
-const phraseToDisplay = getRandomPhraseAsArray(phrases);
+let phraseToDisplay = getRandomPhraseAsArray(phrases);
 //stores a random phrase from the phrases array and turns that phrase into an array
 
 function addPhraseToDisplay(arr) {
@@ -77,10 +78,8 @@ buttonDiv.addEventListener('click', (e) => {
         clickedButton.classList.add('chosen');
         clickedButton.disabled = true;
         if (checkLetter(clickedButton) === null) {
-            const hearts = document.getElementsByClassName('tries');
-            const heartsList = document.querySelector('ol');
-            heartsList.removeChild(hearts[0]);
             wrongGuesses += 1;
+            heartImgs[heartImgs.length - wrongGuesses].src = 'images/lostHeart.png';
         } 
     }
     checkWin();
@@ -116,6 +115,7 @@ function reset() {
     const ul = document.querySelector('#phrase ul');
     const wordDivs = document.querySelectorAll('.word-div');
     const heartsList = document.querySelector('ol');
+    // overlay.className = none;
     for (let i = 0; i < wordDivs.length; i++) {
         ul.removeChild(wordDivs[i]);
     }
@@ -124,16 +124,17 @@ function reset() {
         letterButtons[i].classList.remove('chosen');
     }
     for (let i = 0; i < 5; i++) {
-        let scoreboardList = document.querySelector('#scoreboard ol');
-        let li = document.createElement('li');
-        li.classList.add('tries');
-        scoreboardList.appendChild('li');
-        let img = document.createElement('img');
-        img.src = 'images/liveHeart.png';
-        li.appendChild(img);
+        heartImgs[i].src = 'images/liveHeart.png';
     }
-    getRandomPhraseAsArray(phrases);
-    addPhraseToDisplay(phraseToDisplay);
-
-}
+    const recentPhrase = phraseToDisplay;
+    let newPhraseToDisplay = getRandomPhraseAsArray(phrases);
+    if (recentPhrase !== newPhraseToDisplay) {
+        getRandomPhraseAsArray(phrases);
+        addPhraseToDisplay(phraseToDisplay);
+    } else {
+        newPhraseToDisplay = getRandomPhraseAsArray(phrases);
+        getRandomPhraseAsArray(phrases);
+        addPhraseToDisplay(phraseToDisplay);
+    }
+}        
  
