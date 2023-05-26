@@ -32,6 +32,7 @@ function getRandomPhraseAsArray(arr) {
     // function fetches a random phrase from the phrases array
     let randomNumber = Math.floor(Math.random() * arr.length);
     let phrase = arr[randomNumber];
+    localStorage.setItem('recentPhrase', phrase);
     let phraseSplitByWords = phrase.split(' ');
     return phraseSplitByWords;
 }
@@ -117,7 +118,6 @@ function reset() {
     const heartsList = document.querySelector('ol');
     overlay.classList.remove('win');
     overlay.classList.remove('lose');
-    // overlay.className = none;
     for (let i = 0; i < wordDivs.length; i++) {
         ul.removeChild(wordDivs[i]);
     }
@@ -128,14 +128,14 @@ function reset() {
     for (let i = 0; i < 5; i++) {
         heartImgs[i].src = 'images/liveHeart.png';
     }
-    const recentPhrase = phraseToDisplay;
     let newPhraseToDisplay = getRandomPhraseAsArray(phrases);
-    if (recentPhrase !== newPhraseToDisplay) {
+    if (localStorage.getItem('phrase') !== newPhraseToDisplay) {
         getRandomPhraseAsArray(phrases);
-        addPhraseToDisplay(phraseToDisplay);
+        addPhraseToDisplay(newPhraseToDisplay);
     } else {
+        localStorage.removeItem('phrase');
+        localStorage.setItem('newPhraseToDisplay');
         newPhraseToDisplay = getRandomPhraseAsArray(phrases);
-        getRandomPhraseAsArray(phrases);
         addPhraseToDisplay(phraseToDisplay);
     }
 }        
