@@ -1,6 +1,5 @@
 const letterButtons = document.querySelectorAll('#qwerty button');
 const buttonDiv = document.querySelector('#qwerty');
-const phraseToGuess = document.querySelector('#phrase');
 const startButton = document.querySelector('.btn__reset');
 const title = document.querySelector('.title');
 const heartImgs = document.querySelectorAll('.tries img');
