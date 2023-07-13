@@ -7,7 +7,7 @@ The basic requirements of this project included: creating an array of phrases; c
 
 The extra credit requirements of this project included: creating CSS transitions for each letter in the phrase display as they are revealed; adding a button to the 'success' and 'failure' screens that reset the game--recreating keyboard buttons, generating a new random phrase, and set the number of wrong guesses back to 0.
 
-I went beyond the requirements listed above by: coding my program to ensure that a new phrase is displayed each time the game is reset, so that the same phrase is never displayed twice in a row.
+I went beyond the requirements listed above by: adding 19 fun phrases to my random phrases array (8 phrases required); coding my program to ensure that a new phrase is displayed each time the game is reset, so that the same phrase is never displayed twice in a row; rather than fixing a text-wrap issue that was causing my long phrases to display improperly by simply using only shorter phrases, tackling the issue by doing extra work in order to fix the problem and keep my original and awesome phrase array with varying degrees of length (and difficulty).
 
 Grade Recieved: 'Exceeds Expectations'
 
